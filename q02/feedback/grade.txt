@@ -1,0 +1,11 @@
+Default constructor & One-parameter constructor correct: 5/5
+Copy constructor & Destructor correct: 3/4
+Assignment operator correct: 5/6
+addition operator correct: 3/5
+getPolyOrder correct: 3/3
+getCoeff correct: 3/3
+SetCoeff correct: 2/2
+copy_ correct: 3/4
+destroy_ correct: 2/3
+Cubic correct: 5/5
+total: 34/40

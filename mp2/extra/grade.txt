@@ -1,0 +1,64 @@
+ feedback for qiqian.21
+g++ -std=c++1y  -c -g -O0 -Wall -Wextra -pedantic mp2-1.cpp
+g++ -std=c++1y  -c -g -O0 -Wall -Wextra -pedantic Image.cpp
+In file included from Image.cpp:5:
+./cs225/RGB_HSL.h:15:20: warning: unused function 'rgb2hsl' [-Wunused-function]
+  static hslaColor rgb2hsl(rgbaColor rgb) {
+                   ^
+./cs225/RGB_HSL.h:67:20: warning: unused function 'hsl2rgb' [-Wunused-function]
+  static rgbaColor hsl2rgb(hslaColor hsl) {
+                   ^
+2 warnings generated.
+g++ -std=c++1y  -c -g -O0 -Wall -Wextra -pedantic cs225/PNG.cpp
+g++ -std=c++1y  -c -g -O0 -Wall -Wextra -pedantic cs225/HSLAPixel.cpp
+g++ -std=c++1y  -c -g -O0 -Wall -Wextra -pedantic cs225/lodepng/lodepng.cpp
+g++ mp2-1.o Image.o PNG.o HSLAPixel.o lodepng.o -std=c++1y  -lpthread -lm -o mp2-1	
+g++ -std=c++1y  -c -g -O0 -Wall -Wextra -pedantic main.cpp
+g++ -std=c++1y  -c -g -O0 -Wall -Wextra -pedantic tests/unit_tests.cpp
+g++ unit_tests.o PNG.o HSLAPixel.o lodepng.o Image.o -std=c++1y  -lpthread -lm -o test
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+test is a Catch v2.13.9 host application.
+Run with -? for options
+
+-------------------------------------------------------------------------------
+Image rotateColor(double) keeps the hue in the range [0, 360]
+-------------------------------------------------------------------------------
+tests/unit_tests.cpp:91
+...............................................................................
+
+tests/unit_tests.cpp:99: FAILED:
+  REQUIRE( result.getPixel(10, 90)->h == 280 )
+with expansion:
+  -80.0 == 280 (0x118)
+
+WARNING: Call to cs225::PNG::getPixel(0,100) tries to access y=100, which is outside of the image (image height: 100).
+       : Truncating y to 99
+WARNING: Call to cs225::PNG::getPixel(0,100) tries to access y=100, which is outside of the image (image height: 100).
+       : Truncating y to 99
+WARNING: Call to cs225::PNG::getPixel(0,100) tries to access y=100, which is outside of the image (image height: 100).
+       : Truncating y to 99
+WARNING: Call to cs225::PNG::getPixel(0,100) tries to access y=100, which is outside of the image (image height: 100).
+       : Truncating y to 99
+WARNING: Call to cs225::PNG::getPixel(0,101) tries to access y=101, which is outside of the image (image height: 100).
+       : Truncating y to 99
+-------------------------------------------------------------------------------
+Image scale(1080,200) scales pixel data in a reasonable way
+-------------------------------------------------------------------------------
+tests/unit_tests.cpp:144
+...............................................................................
+
+tests/unit_tests.cpp:150: FAILED:
+  REQUIRE( result.width() == 720 )
+with expansion:
+  1080 (0x438) == 720 (0x2d0)
+
+===============================================================================
+test cases: 12 | 10 passed | 2 failed
+assertions: 15 | 13 passed | 2 failed
+
+Pass 10 tests! +3
+lighten.png looks good. +1
+saturate.png looks good. +1
+
+Total: 5
